@@ -2,6 +2,7 @@ import org.apache.commons.io.IOUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PatMatch {
@@ -13,6 +14,17 @@ public class PatMatch {
 
         return result;
     }
+
+    public static void main(String[] args) throws Exception{
+
+        PatMatch pt =new PatMatch();
+
+        String input = pt.readRawDataToString();
+        findItem((pt.splitText(input)));
+
+    }
+
+
 
     public ArrayList<String> splitText(String rawText) {
 
@@ -26,35 +38,33 @@ public class PatMatch {
 
     }
 
-    public void findItem () {
-        PatMatch pt = new PatMatch();
+    public static void findItem (ArrayList <String> entriesAl) {
+
 
         String myPattern = "[nN]\\w+:(\\w*);\\w{5}:(\\d.\\d{2})?;\\w{4}:(\\w{4}).\\w{10}:(\\d.\\d{2}.\\d{4})";
-        String fullText = readRawDataToString();
+
+        Pattern pt = Pattern.compile(myPattern);
+
+        for (String entry: entriesAl) {
+            Matcher matcher = pt.matcher(entry);
+            if (matcher.find()){
+                String name = matcher.group(1);
+                String price = matcher.group(2);
+                String type = matcher.group(3);
+                String expiration = matcher.group(4);
 
 
-        Pattern pat = Pattern.compile(myPattern);
-        Matcher matcher = pat.matcher(???);
 
-        if(match)
+            }
+
+        }
+
 
 
 
     }
 
 
-
-
-
-
-    public static void main(String[] args) throws Exception{
-
-        PatMatch pt =new PatMatch();
-
-        String input = pt.readRawDataToString();
-        pt.splitText(input);
-
-    }
 
 
 
