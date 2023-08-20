@@ -2,6 +2,7 @@ import org.apache.commons.io.IOUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,7 +21,7 @@ public class PatMatch {
         PatMatch pt =new PatMatch();
 
         String input = pt.readRawDataToString();
-        findItem((pt.splitText(input)));
+        //findItem((pt.splitText(input)));
 
     }
 
@@ -38,31 +39,59 @@ public class PatMatch {
 
     }
 
-    public static void findItem (ArrayList <String> entriesAl) {
+    public static ArrayList<Groceries> createGroceryList (ArrayList <String> entriesAl){
 
+        ArrayList<Groceries> glist = new ArrayList<>();
 
-        String myPattern = "[nN]\\w+:(\\w*);\\w{5}:(\\d.\\d{2})?;\\w{4}:(\\w{4}).\\w{10}:(\\d.\\d{2}.\\d{4})";
+        for(String x: entriesAl){
+            //now for each line i want to break into each part of groceries
+            String myPattern = "[nN]\\w+:(\\w*);\\w{5}:(\\d.\\d{2})?;\\w{4}:(\\w{4}).\\w{10}:(\\d.\\d{2}.\\d{4})";
+            Pattern pt = Pattern.compile(myPattern);
 
-        Pattern pt = Pattern.compile(myPattern);
-
-        for (String entry: entriesAl) {
-            Matcher matcher = pt.matcher(entry);
+            Matcher matcher = pt.matcher(x);
             if (matcher.find()){
                 String name = matcher.group(1);
                 String price = matcher.group(2);
                 String type = matcher.group(3);
                 String expiration = matcher.group(4);
 
-
+                Groceries groceries = new Groceries(name,price,type,expiration);
+                glist.add(groceries);
 
             }
 
+
         }
-
-
-
+        return glist;
 
     }
+
+
+
+
+//    public static void findItem (ArrayList <String> entriesAl) {
+//
+//
+//        String myPattern = "[nN]\\w+:(\\w*);\\w{5}:(\\d.\\d{2})?;\\w{4}:(\\w{4}).\\w{10}:(\\d.\\d{2}.\\d{4})";
+//        Pattern pt = Pattern.compile(myPattern);
+//
+//        HashMap<String, ArrayList<String>> itemData = new HashMap<>();
+//
+//        for (String entry: entriesAl) {
+//            Matcher matcher = pt.matcher(entry);
+//            if (matcher.find()){
+//                String name = matcher.group(1);
+//                String price = matcher.group(2);
+//                String type = matcher.group(3);
+//                String expiration = matcher.group(4);
+//
+//
+//
+//            }
+//
+//        }
+//
+//    }
 
 
 

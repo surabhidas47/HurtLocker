@@ -5,12 +5,12 @@ import java.util.regex.Pattern;
 public class Groceries {
 
     private String name;
-    private Double price;
+    private String price;
     private String type;
     private String expiration;
 
 
-    public Groceries(String name, Double price, String type, String expiration) {
+    public Groceries(String name, String price, String type, String expiration) {
 
 
 
@@ -31,7 +31,7 @@ public class Groceries {
         return name;
     }
 
-    public Double getPrice() {
+    public String getPrice() {
         return price;
     }
 
@@ -47,7 +47,7 @@ public class Groceries {
         this.name = name;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -57,5 +57,16 @@ public class Groceries {
 
     public void setExpiration(String expiration) {
         this.expiration = expiration;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Groceries{" +
+                "name='" + name + '\'' +
+                ", price='" + price + '\'' +
+                ", type='" + type + '\'' +
+                ", expiration='" + expiration + '\'' +
+                '}';
     }
 }
